@@ -1,0 +1,112 @@
+[gd_scene load_steps=6 format=3 uid="uid://x6384m1oavyb"]
+
+[ext_resource type="Script" uid="uid://dpeeetd03npj" path="res://scripts/game_manager.gd" id="1_80nbo"]
+[ext_resource type="Texture2D" uid="uid://e6fcmid2owpi" path="res://assets/hand-paper.png" id="1_e2o6t"]
+[ext_resource type="FontFile" uid="uid://60tgratqgnb2" path="res://assets/monogram.ttf" id="2_7jktm"]
+[ext_resource type="Texture2D" uid="uid://duey2j7l0q4da" path="res://assets/hand-rock.png" id="2_fc0e3"]
+[ext_resource type="Texture2D" uid="uid://dv3k31lrqbcdd" path="res://assets/hand-scissors.png" id="4_7jktm"]
+
+[node name="game" type="Node2D"]
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_80nbo")
+
+[node name="message" type="Label" parent="."]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -65.0
+offset_top = -11.5
+offset_right = 65.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("2_7jktm")
+text = "make your move"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="player control" type="Node2D" parent="VBoxContainer"]
+position = Vector2(0, 68.5)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/player control"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -20.0
+offset_right = 64.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="rock" type="Button" parent="VBoxContainer/player control/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+icon = ExtResource("2_fc0e3")
+
+[node name="paper" type="Button" parent="VBoxContainer/player control/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+icon = ExtResource("1_e2o6t")
+
+[node name="scissors" type="Button" parent="VBoxContainer/player control/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+icon = ExtResource("4_7jktm")
+
+[node name="computer control" type="Node2D" parent="VBoxContainer"]
+position = Vector2(0, -48.5)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/computer control"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -16.0
+offset_right = 52.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="rock" type="TextureRect" parent="VBoxContainer/computer control/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("2_fc0e3")
+
+[node name="paper" type="TextureRect" parent="VBoxContainer/computer control/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("1_e2o6t")
+
+[node name="scissors" type="TextureRect" parent="VBoxContainer/computer control/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("4_7jktm")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(5, 5)
+
+[connection signal="pressed" from="VBoxContainer/player control/HBoxContainer/rock" to="GameManager" method="_on_rock_pressed"]
+[connection signal="pressed" from="VBoxContainer/player control/HBoxContainer/paper" to="GameManager" method="_on_paper_pressed"]
+[connection signal="pressed" from="VBoxContainer/player control/HBoxContainer/scissors" to="GameManager" method="_on_scissors_pressed"]
